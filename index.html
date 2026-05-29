@@ -11,153 +11,323 @@
     --orange: #3DD9A4;
     --orange-deep: #25C490;
     --orange-glow: rgba(61,217,164,0.22);
-    --orange-soft: rgba(61,217,164,0.08);
-    --bg: #F0FAF6; --bg2: #FFFFFF; --bg3: #E8F7F1; --bg4: #D0EDE2;
-    --text: #1A3D2E; --text2: #4A7A62; --text3: #8BB8A2;
-    --green: #3DD9A4; --red: #FF6B8A; --blue: #5BA8F5; --radius: 14px;
+    --orange-soft: rgba(245,166,35,0.08);
+    --bg: #F0FAF6;
+    --bg2: #FFFFFF;
+    --bg3: #E8F7F1;
+    --bg4: #D0EDE2;
+    --text: #1A3D2E;
+    --text2: #4A7A62;
+    --text3: #8BB8A2;
+    --green: #3DD9A4;
+    --red: #FF6B8A;
+    --blue: #5BA8F5;
+    --radius: 14px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--text); max-width: 430px; margin: 0 auto; min-height: 100vh; overflow-x: hidden; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    max-width: 430px;
+    margin: 0 auto;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-  .header { position: sticky; top: 0; z-index: 100; background: rgba(240,250,246,0.94); backdrop-filter: blur(20px); padding: 14px 16px 10px; border-bottom: 2px solid var(--bg4); }
-  .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(240,250,246,0.94);
+    backdrop-filter: blur(20px);
+    padding: 14px 16px 10px;
+    border-bottom: 2px solid var(--bg4);
+  }
+  .header-top {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 12px;
+  }
   .logo { display: flex; align-items: center; gap: 7px; font-size: 17px; font-weight: 700; color: var(--orange); }
   .today-spend { font-size: 11px; color: var(--text2); font-family: 'JetBrains Mono', monospace; }
   .today-spend span { color: var(--orange); font-weight: 600; }
-  .nav-tabs { display: grid; grid-template-columns: repeat(3,1fr); gap: 5px; }
-  .tab-btn { padding: 7px 4px; border: none; background: var(--bg3); color: var(--text2); font-family: 'Nunito',sans-serif; font-size: 11.5px; font-weight: 500; border-radius: 8px; cursor: pointer; transition: all .18s; white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 4px; }
-  .tab-btn.active { background: linear-gradient(135deg,var(--orange),var(--orange-deep)); color: #fff; font-weight: 700; box-shadow: 0 2px 10px rgba(61,217,164,0.45); }
+
+  .nav-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+  .tab-btn {
+    padding: 7px 4px;
+    border: none;
+    background: var(--bg3);
+    color: var(--text2);
+    font-family: 'Nunito', sans-serif;
+    font-size: 11.5px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+  }
+  .tab-btn .ti { font-size: 13px; }
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--orange), var(--orange-deep));
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 2px 10px rgba(61,217,164,0.45);
+  }
 
   .page { display: none; padding: 18px 16px 40px; }
   .page.active { display: block; }
 
-  /* CHAT */
-  .chat-area { min-height: 300px; max-height: 340px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding: 4px 0 14px; scrollbar-width: none; }
+  .chat-area {
+    min-height: 300px; max-height: 340px;
+    overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
+    padding: 4px 0 14px; scrollbar-width: none;
+  }
   .chat-area::-webkit-scrollbar { display: none; }
-  .msg { max-width: 82%; padding: 10px 14px; border-radius: 16px; font-size: 13px; line-height: 1.5; animation: msgIn .22s ease; }
+  .msg {
+    max-width: 82%; padding: 10px 14px; border-radius: 16px;
+    font-size: 13px; line-height: 1.5; animation: msgIn 0.22s ease;
+  }
   @keyframes msgIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-  .msg-user { align-self: flex-end; background: linear-gradient(135deg,var(--orange),var(--orange-deep)); color: #fff; font-weight: 500; border-bottom-right-radius: 4px; }
+  .msg-user { align-self: flex-end; background: linear-gradient(135deg, var(--orange), var(--orange-deep)); color: #fff; font-weight: 500; border-bottom-right-radius: 4px; }
   .msg-bot { align-self: flex-start; background: var(--bg3); color: var(--text); border-bottom-left-radius: 4px; border: 1px solid var(--bg4); }
-  .msg-bot .label { display: inline-block; background: var(--orange-glow); color: var(--orange); font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 20px; margin-bottom: 4px; font-family: 'JetBrains Mono',monospace; }
-  .cat-picker { align-self: flex-start; background: var(--bg3); border: 1px solid var(--bg4); border-radius: 16px; border-bottom-left-radius: 4px; padding: 12px; max-width: 92%; animation: msgIn .22s ease; }
+  .msg-bot .label {
+    display: inline-block; background: var(--orange-glow); color: var(--orange);
+    font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 20px;
+    margin-bottom: 4px; font-family: 'JetBrains Mono', monospace;
+  }
+  .cat-picker {
+    align-self: flex-start; background: var(--bg3); border: 1px solid var(--bg4);
+    border-radius: 16px; border-bottom-left-radius: 4px; padding: 12px;
+    max-width: 92%; animation: msgIn 0.22s ease;
+  }
   .cat-picker p { font-size: 12px; color: var(--text2); margin-bottom: 9px; }
   .cat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 5px; }
-  .cat-chip { background: var(--bg4); border: 1px solid transparent; border-radius: 8px; padding: 6px 3px; text-align: center; cursor: pointer; transition: all .15s; font-family: 'Nunito',sans-serif; color: var(--text); }
+  .cat-chip {
+    background: var(--bg4); border: 1px solid transparent; border-radius: 8px;
+    padding: 6px 3px; text-align: center; cursor: pointer; transition: all 0.15s;
+    font-family: 'Nunito', sans-serif; color: var(--text);
+  }
   .cat-chip:hover,.cat-chip:active { border-color:var(--orange); background:var(--orange-soft); color:var(--orange); }
   .cat-chip .emoji { display:block; font-size:15px; margin-bottom:2px; }
   .cat-chip .name { font-size:9.5px; }
+
   .input-meta { display:flex; align-items:center; gap:7px; margin-bottom:7px; }
-  .date-toggle { display:flex; align-items:center; gap:5px; background:var(--bg3); border:1px solid var(--bg4); border-radius:8px; padding:6px 10px; cursor:pointer; font-size:11.5px; color:var(--text2); transition:all .15s; flex:1; }
+  .date-toggle {
+    display:flex; align-items:center; gap:5px;
+    background:var(--bg3); border:1px solid var(--bg4); border-radius:8px;
+    padding:6px 10px; cursor:pointer; font-size:11.5px; color:var(--text2);
+    transition:all 0.15s; flex:1;
+  }
   .date-toggle.custom { border-color:var(--orange); color:var(--orange); background:var(--orange-soft); }
-  .datetime-panel { display:none; background:var(--bg3); border:1px solid var(--bg4); border-radius:var(--radius); padding:13px; margin-bottom:9px; animation:slideDown .2s ease; }
+  .datetime-panel {
+    display:none; background:var(--bg3); border:1px solid var(--bg4);
+    border-radius:var(--radius); padding:13px; margin-bottom:9px;
+    animation:slideDown 0.2s ease;
+  }
   .datetime-panel.open { display:block; }
   @keyframes slideDown { from{opacity:0;transform:translateY(-5px)} to{opacity:1;transform:translateY(0)} }
   .datetime-row { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
   .dt-field label { display:block; font-size:10px; color:var(--text3); text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px; font-weight:600; }
-  .dt-field input { width:100%; background:var(--bg4); border:1px solid var(--bg4); border-radius:8px; color:var(--text); font-family:'JetBrains Mono',monospace; font-size:12px; padding:7px 9px; outline:none; transition:border-color .15s; color-scheme:light; }
+  .dt-field input {
+    width:100%; background:var(--bg4); border:1px solid var(--bg4); border-radius:8px;
+    color:var(--text); font-family:'JetBrains Mono',monospace; font-size:12px;
+    padding:7px 9px; outline:none; transition:border-color .15s; color-scheme:light;
+  }
   .dt-field input:focus { border-color:var(--orange); }
   .dt-presets { display:flex; gap:5px; margin-top:9px; flex-wrap:wrap; }
-  .dt-preset { background:var(--bg4); border:1px solid transparent; border-radius:6px; color:var(--text2); font-family:'Nunito',sans-serif; font-size:10.5px; padding:4px 9px; cursor:pointer; transition:all .15s; }
+  .dt-preset {
+    background:var(--bg4); border:1px solid transparent; border-radius:6px;
+    color:var(--text2); font-family:'Nunito',sans-serif; font-size:10.5px;
+    padding:4px 9px; cursor:pointer; transition:all .15s;
+  }
+  .dt-preset:hover { border-color:var(--orange); color:var(--orange); }
   .dt-preset.active { background:var(--orange-glow); border-color:var(--orange); color:var(--orange); font-weight:600; }
   .chat-input-row { display:flex; gap:7px; align-items:flex-end; }
-  .chat-input { flex:1; background:var(--bg3); border:1px solid var(--bg4); border-radius:12px; color:var(--text); font-family:'Nunito',sans-serif; font-size:13.5px; padding:10px 13px; outline:none; resize:none; min-height:42px; max-height:90px; transition:border-color .15s; line-height:1.4; }
+  .chat-input {
+    flex:1; background:var(--bg3); border:1px solid var(--bg4); border-radius:12px;
+    color:var(--text); font-family:'Nunito',sans-serif; font-size:13.5px;
+    padding:10px 13px; outline:none; resize:none; min-height:42px; max-height:90px;
+    transition:border-color .15s; line-height:1.4;
+  }
   .chat-input:focus { border-color:var(--orange); }
   .chat-input::placeholder { color:var(--text3); }
-  .send-btn { width:42px; height:42px; background:var(--orange); border:none; border-radius:12px; font-size:17px; cursor:pointer; transition:all .15s; flex-shrink:0; display:flex; align-items:center; justify-content:center; box-shadow:0 3px 12px rgba(61,217,164,0.4); }
+  .send-btn {
+    width:42px; height:42px; background:var(--orange); border:none; border-radius:12px;
+    font-size:17px; cursor:pointer; transition:all .15s; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 3px 12px rgba(61,217,164,0.4);
+  }
   .send-btn:active { transform:scale(.94); }
   .hint-text { font-size:10.5px; color:var(--text3); margin-top:7px; text-align:center; line-height:1.5; }
 
-  /* FIXED */
   .fixed-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
   .section-title { font-size:13px; font-weight:600; color:var(--text2); text-transform:uppercase; letter-spacing:.5px; }
-  .add-btn { background:var(--orange); border:none; border-radius:8px; color:#F0FAF6; font-family:'Nunito',sans-serif; font-size:11.5px; font-weight:700; padding:6px 12px; cursor:pointer; }
-  .fixed-item { background:var(--bg2); border:1px solid var(--bg3); border-radius:var(--radius); padding:13px 15px; display:flex; align-items:center; gap:11px; margin-bottom:7px; }
+  .add-btn {
+    background:var(--orange); border:none; border-radius:8px; color:#F0FAF6;
+    font-family:'Nunito',sans-serif; font-size:11.5px; font-weight:700;
+    padding:6px 12px; cursor:pointer; transition:all .15s;
+  }
+  .add-btn:active { transform:scale(.96); }
+  .fixed-item {
+    background:var(--bg2); border:1px solid var(--bg3); border-radius:var(--radius);
+    padding:13px 15px; display:flex; align-items:center; gap:11px; margin-bottom:7px;
+  }
   .fixed-emoji { font-size:21px; width:34px; text-align:center; }
   .fixed-info { flex:1; }
   .fixed-name { font-size:13.5px; font-weight:500; }
   .fixed-sub { font-size:10.5px; color:var(--text3); margin-top:2px; }
   .fixed-amount { font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:600; color:var(--orange); }
-  .fixed-del { background:none; border:none; color:var(--text3); font-size:15px; cursor:pointer; padding:4px; }
-  .total-bar { background:var(--bg3); border-radius:var(--radius); padding:13px 15px; display:flex; justify-content:space-between; align-items:center; margin-top:11px; border:1px solid var(--bg4); }
+  .fixed-del { background:none; border:none; color:var(--text3); font-size:15px; cursor:pointer; padding:4px; transition:color .15s; }
+  .fixed-del:hover { color:var(--red); }
+  .total-bar {
+    background:var(--bg3); border-radius:var(--radius); padding:13px 15px;
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:11px; border:1px solid var(--bg4);
+  }
   .total-bar .label { font-size:12.5px; color:var(--text2); }
   .total-bar .amount { font-family:'JetBrains Mono',monospace; font-size:17px; font-weight:700; color:var(--orange); }
-  .apply-btn { width:100%; background:linear-gradient(135deg,var(--orange),var(--orange-deep)); border:none; border-radius:var(--radius); color:#F0FAF6; font-family:'Nunito',sans-serif; font-size:14px; font-weight:700; padding:13px; margin-top:13px; cursor:pointer; box-shadow:0 4px 18px rgba(61,217,164,0.35); }
+  .apply-btn {
+    width:100%; background:linear-gradient(135deg,var(--orange),var(--orange-deep));
+    border:none; border-radius:var(--radius); color:#F0FAF6;
+    font-family:'Nunito',sans-serif; font-size:14px; font-weight:700;
+    padding:13px; margin-top:13px; cursor:pointer; transition:all .2s;
+    box-shadow:0 4px 18px rgba(61,217,164,0.35);
+  }
+  .apply-btn:active { transform:scale(.98); }
 
-  /* STATS */
   .stats-month-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
-  .month-nav { background:var(--bg3); border:none; border-radius:8px; color:var(--text2); width:31px; height:31px; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .month-nav {
+    background:var(--bg3); border:none; border-radius:8px; color:var(--text2);
+    width:31px; height:31px; font-size:15px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; transition:all .15s;
+  }
+  .month-nav:hover { background:var(--bg4); color:var(--orange); }
   .month-label { font-size:15px; font-weight:700; font-family:'JetBrains Mono',monospace; color:var(--orange); }
   .stats-cards { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-bottom:16px; }
   .stat-card { background:var(--bg2); border:1px solid var(--bg3); border-radius:var(--radius); padding:13px; }
   .stat-card.full { grid-column:1/-1; }
   .stat-card .s-label { font-size:9.5px; color:var(--text3); text-transform:uppercase; letter-spacing:.5px; margin-bottom:5px; font-weight:600; }
   .stat-card .s-val { font-family:'JetBrains Mono',monospace; font-size:19px; font-weight:700; }
-  .stat-card .s-val.red { color:var(--red); } .stat-card .s-val.green { color:var(--green); } .stat-card .s-val.orange { color:var(--orange); }
+  .stat-card .s-val.red { color:var(--red); }
+  .stat-card .s-val.green { color:var(--green); }
+  .stat-card .s-val.orange { color:var(--orange); }
   .donut-wrap { display:flex; align-items:center; gap:16px; padding:4px 0; }
+  .donut-svg { flex-shrink:0; }
   .legend-item { display:flex; align-items:center; gap:7px; margin-bottom:7px; font-size:11.5px; }
   .legend-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
-  .legend-name { flex:1; color:var(--text2); } .legend-amt { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; }
+  .legend-name { flex:1; color:var(--text2); }
+  .legend-amt { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; }
   .prog-item { margin-bottom:11px; }
   .prog-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
-  .prog-name { font-size:11.5px; color:var(--text2); }
+  .prog-name { font-size:11.5px; color:var(--text2); display:flex; align-items:center; gap:5px; }
   .prog-amt { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; }
   .prog-bar-bg { height:5px; background:var(--bg4); border-radius:3px; overflow:hidden; }
-  .prog-bar-fill { height:100%; border-radius:3px; transition:width .8s cubic-bezier(.4,0,.2,1); }
+  .prog-bar-fill { height:100%; border-radius:3px; background:var(--orange); transition:width .8s cubic-bezier(.4,0,.2,1); }
 
-  /* RECORDS */
   .records-month { display:flex; align-items:center; gap:9px; margin-bottom:14px; }
-  .month-badge { background:var(--orange); color:#F0FAF6; font-size:12.5px; font-weight:700; padding:5px 13px; border-radius:20px; font-family:'JetBrains Mono',monospace; }
+  .month-badge {
+    background:var(--orange); color:#F0FAF6; font-size:12.5px; font-weight:700;
+    padding:5px 13px; border-radius:20px; font-family:'JetBrains Mono',monospace;
+  }
   .day-group { margin-bottom:13px; }
-  .day-header { display:flex; justify-content:space-between; align-items:center; padding:5px 0; border-bottom:1px solid var(--bg3); margin-bottom:7px; }
+  .day-header {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:5px 0; border-bottom:1px solid var(--bg3); margin-bottom:7px;
+  }
   .day-label { font-size:12.5px; color:var(--text2); font-weight:500; }
   .day-summary { font-size:11.5px; font-family:'JetBrains Mono',monospace; }
-  .day-summary .inc { color:var(--green); } .day-summary .exp { color:var(--red); }
-  .record-item { background:var(--bg2); border:1px solid var(--bg3); border-radius:var(--radius); padding:11px 13px; display:flex; align-items:center; gap:10px; margin-bottom:5px; }
+  .day-summary .inc { color:var(--green); }
+  .day-summary .exp { color:var(--red); }
+  .record-item {
+    background:var(--bg2); border:1px solid var(--bg3); border-radius:var(--radius);
+    padding:11px 13px; display:flex; align-items:center; gap:10px; margin-bottom:5px;
+  }
   .record-emoji { font-size:20px; width:32px; text-align:center; }
   .record-info { flex:1; min-width:0; }
   .record-cat { font-size:13.5px; font-weight:500; }
   .record-sub { font-size:10.5px; color:var(--text3); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .record-right { text-align:right; flex-shrink:0; }
   .record-amt { font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:600; }
-  .record-amt.neg { color:var(--red); } .record-amt.pos { color:var(--green); }
-  .record-del { background:none; border:none; color:var(--text3); font-size:13px; cursor:pointer; padding:3px; }
+  .record-amt.neg { color:var(--red); }
+  .record-amt.pos { color:var(--green); }
+  .record-time { font-size:10.5px; color:var(--text3); margin-top:2px; }
+  .record-del { background:none; border:none; color:var(--text3); font-size:13px; cursor:pointer; padding:3px; transition:color .15s; }
   .record-del:hover { color:var(--red); }
-  .record-edit { background:none; border:none; color:var(--text3); font-size:12px; cursor:pointer; padding:3px; }
+  .record-edit { background:none; border:none; color:var(--text3); font-size:12px; cursor:pointer; padding:3px; transition:color .15s; }
   .record-edit:hover { color:var(--orange); }
 
-  /* QUERY */
   .query-section { margin-bottom:18px; }
   .query-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:11px; display:flex; align-items:center; gap:6px; }
+  .query-title .qt-icon { font-size:15px; }
   .filter-grid { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-bottom:12px; }
   .filter-field label { display:block; font-size:10px; color:var(--text3); text-transform:uppercase; letter-spacing:.5px; font-weight:600; margin-bottom:5px; }
-  .filter-select,.filter-input { width:100%; background:var(--bg3); border:1px solid var(--bg4); border-radius:9px; color:var(--text); font-family:'Nunito',sans-serif; font-size:12.5px; padding:8px 10px; outline:none; transition:border-color .15s; color-scheme:light; -webkit-appearance:none; appearance:none; }
-  .filter-select:focus,.filter-input:focus { border-color:var(--orange); }
+  .filter-select, .filter-input {
+    width:100%; background:var(--bg3); border:1px solid var(--bg4); border-radius:9px;
+    color:var(--text); font-family:'Nunito',sans-serif; font-size:12.5px;
+    padding:8px 10px; outline:none; transition:border-color .15s; color-scheme:light;
+    -webkit-appearance:none; appearance:none;
+  }
+  .filter-select:focus, .filter-input:focus { border-color:var(--orange); }
   .filter-field.full { grid-column:1/-1; }
-  .query-btn { width:100%; background:var(--orange); border:none; border-radius:var(--radius); color:#F0FAF6; font-family:'Nunito',sans-serif; font-size:14px; font-weight:700; padding:12px; cursor:pointer; box-shadow:0 3px 14px rgba(61,217,164,0.35); }
+  .query-btn {
+    width:100%; background:var(--orange); border:none; border-radius:var(--radius);
+    color:#F0FAF6; font-family:'Nunito',sans-serif; font-size:14px; font-weight:700;
+    padding:12px; cursor:pointer; transition:all .15s;
+    box-shadow:0 3px 14px rgba(61,217,164,0.35);
+  }
+  .query-btn:active { transform:scale(.98); }
+
   .query-results { margin-top:16px; }
-  .result-header { background:var(--bg3); border:1px solid var(--bg4); border-radius:var(--radius); padding:13px 15px; margin-bottom:12px; }
+  .result-header {
+    background:var(--bg3); border:1px solid var(--bg4); border-radius:var(--radius);
+    padding:13px 15px; margin-bottom:12px;
+  }
   .result-header-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
   .result-header-row:last-child { margin-bottom:0; }
   .rh-label { font-size:11px; color:var(--text3); }
   .rh-val { font-family:'JetBrains Mono',monospace; font-size:13.5px; font-weight:700; }
-  .rh-val.orange { color:var(--orange); } .rh-val.red { color:var(--red); } .rh-val.green { color:var(--green); }
+  .rh-val.orange { color:var(--orange); }
+  .rh-val.red { color:var(--red); }
+  .rh-val.green { color:var(--green); }
+
   .export-row { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-bottom:14px; }
-  .export-btn { background:var(--bg3); border:1px solid var(--bg4); border-radius:var(--radius); color:var(--text2); font-family:'Nunito',sans-serif; font-size:12px; font-weight:600; padding:11px 8px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:5px; }
+  .export-btn {
+    background:var(--bg3); border:1px solid var(--bg4); border-radius:var(--radius);
+    color:var(--text2); font-family:'Nunito',sans-serif; font-size:12px; font-weight:600;
+    padding:11px 8px; cursor:pointer; transition:all .15s; text-align:center;
+    display:flex; align-items:center; justify-content:center; gap:5px;
+  }
   .export-btn:hover { border-color:var(--orange); color:var(--orange); background:var(--orange-soft); }
+  .export-btn:active { transform:scale(.97); }
+  .export-btn .eb-icon { font-size:16px; }
+
   .result-table-wrap { overflow-x:auto; border-radius:var(--radius); border:1px solid var(--bg3); }
   .result-table { width:100%; border-collapse:collapse; font-size:11.5px; min-width:360px; }
-  .result-table th { background:var(--bg3); color:var(--text2); font-weight:600; font-size:10.5px; padding:9px 10px; text-align:left; border-bottom:1px solid var(--bg4); text-transform:uppercase; letter-spacing:.4px; }
-  .result-table td { padding:9px 10px; border-bottom:1px solid var(--bg3); color:var(--text); vertical-align:middle; }
+  .result-table th {
+    background:var(--bg3); color:var(--text2); font-weight:600; font-size:10.5px;
+    padding:9px 10px; text-align:left; border-bottom:1px solid var(--bg4);
+    text-transform:uppercase; letter-spacing:.4px;
+  }
+  .result-table td {
+    padding:9px 10px; border-bottom:1px solid var(--bg3); color:var(--text);
+    vertical-align:middle;
+  }
   .result-table tr:last-child td { border-bottom:none; }
   .result-table tr:hover td { background:var(--bg2); }
   .td-amt { font-family:'JetBrains Mono',monospace; font-weight:600; }
-  .td-neg { color:var(--red); } .td-pos { color:var(--green); }
+  .td-neg { color:var(--red); }
+  .td-pos { color:var(--green); }
 
-  /* SETTINGS */
   .settings-section { margin-bottom:20px; }
-  .settings-section-title { font-size:10.5px; color:var(--text3); text-transform:uppercase; letter-spacing:.8px; font-weight:600; margin-bottom:9px; }
+  .settings-section-title { font-size:10.5px; color:var(--text3); text-transform:uppercase; letter-spacing:.8px; font-weight:600; margin-bottom:9px; padding-left:2px; }
   .settings-group { background:var(--bg2); border:1px solid var(--bg3); border-radius:var(--radius); overflow:hidden; }
-  .settings-item { display:flex; align-items:center; padding:12px 15px; gap:11px; border-bottom:1px solid var(--bg3); cursor:pointer; transition:background .15s; }
+  .settings-item {
+    display:flex; align-items:center; padding:12px 15px; gap:11px;
+    border-bottom:1px solid var(--bg3); cursor:pointer; transition:background .15s;
+  }
   .settings-item:last-child { border-bottom:none; }
   .settings-item:hover { background:var(--bg3); }
   .settings-item .s-emoji { font-size:17px; width:26px; text-align:center; }
@@ -165,29 +335,40 @@
   .settings-item .s-count { font-size:10.5px; color:var(--text3); background:var(--bg4); padding:2px 8px; border-radius:20px; font-family:'JetBrains Mono',monospace; }
   .settings-item .s-arrow { color:var(--text3); font-size:11px; }
 
-  /* MODALS */
-  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(26,61,46,0.4); backdrop-filter:blur(6px); z-index:200; align-items:flex-end; justify-content:center; }
+  .modal-overlay {
+    display:none; position:fixed; inset:0; background:rgba(26,61,46,0.4);
+    backdrop-filter:blur(6px); z-index:200; align-items:flex-end; justify-content:center;
+  }
   .modal-overlay.open { display:flex; }
-  .modal { background:var(--bg2); border-radius:20px 20px 0 0; padding:22px 18px 34px; width:100%; max-width:430px; animation:slideUp .23s ease; max-height:85vh; overflow-y:auto; }
+  .modal {
+    background:var(--bg2); border-radius:20px 20px 0 0; padding:22px 18px 34px;
+    width:100%; max-width:430px; animation:slideUp .23s ease;
+    max-height:85vh; overflow-y:auto;
+  }
   @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
   .modal-title { font-size:16px; font-weight:700; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; }
   .modal-close { background:var(--bg4); border:none; border-radius:50%; width:27px; height:27px; color:var(--text2); cursor:pointer; font-size:13px; display:flex; align-items:center; justify-content:center; }
   .field-group { margin-bottom:13px; }
   .field-group label { display:block; font-size:10px; color:var(--text3); text-transform:uppercase; letter-spacing:.5px; font-weight:600; margin-bottom:5px; }
-  .field-input { width:100%; background:var(--bg3); border:1px solid var(--bg4); border-radius:10px; color:var(--text); font-family:'Nunito',sans-serif; font-size:13.5px; padding:10px 13px; outline:none; transition:border-color .15s; }
+  .field-input {
+    width:100%; background:var(--bg3); border:1px solid var(--bg4); border-radius:10px;
+    color:var(--text); font-family:'Nunito',sans-serif; font-size:13.5px;
+    padding:10px 13px; outline:none; transition:border-color .15s;
+  }
   .field-input:focus { border-color:var(--orange); }
   .cat-select { display:grid; grid-template-columns:repeat(4,1fr); gap:5px; }
   .cat-select-chip { background:var(--bg3); border:1.5px solid transparent; border-radius:8px; padding:7px 4px; text-align:center; cursor:pointer; transition:all .15s; }
   .cat-select-chip.selected { border-color:var(--orange); background:var(--orange-soft); }
   .cat-select-chip .e { font-size:17px; display:block; margin-bottom:2px; }
   .cat-select-chip .n { font-size:9.5px; color:var(--text2); }
-  .confirm-btn { width:100%; background:var(--orange); border:none; border-radius:12px; color:#F0FAF6; font-family:'Nunito',sans-serif; font-size:14px; font-weight:700; padding:12px; margin-top:5px; cursor:pointer; }
+  .confirm-btn { width:100%; background:var(--orange); border:none; border-radius:12px; color:#F0FAF6; font-family:'Nunito',sans-serif; font-size:14px; font-weight:700; padding:12px; margin-top:5px; cursor:pointer; transition:all .15s; }
+  .confirm-btn:active { transform:scale(.98); }
   .cat-manage-list { margin-top:11px; }
   .cat-manage-item { display:flex; align-items:center; gap:9px; padding:9px 0; border-bottom:1px solid var(--bg3); }
   .cat-manage-item:last-child { border-bottom:none; }
   .cat-manage-emoji { font-size:17px; width:26px; text-align:center; }
   .cat-manage-name { flex:1; font-size:13.5px; }
-  .cat-manage-del { background:none; border:none; color:var(--text3); font-size:15px; cursor:pointer; padding:3px 7px; border-radius:5px; }
+  .cat-manage-del { background:none; border:none; color:var(--text3); font-size:15px; cursor:pointer; padding:3px 7px; border-radius:5px; transition:all .15s; }
   .cat-manage-del:hover { color:var(--red); background:rgba(244,67,54,.1); }
   .cat-add-row { display:flex; gap:7px; margin-top:11px; }
   .cat-add-emoji-input { width:48px; background:var(--bg3); border:1px solid var(--bg4); border-radius:8px; color:var(--text); font-size:17px; padding:7px; text-align:center; outline:none; }
@@ -198,7 +379,14 @@
   .empty-state { text-align:center; padding:38px 18px; color:var(--text3); }
   .empty-state .e-icon { font-size:34px; margin-bottom:9px; }
   .empty-state p { font-size:12.5px; line-height:1.6; }
-  .toast { position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(18px); background:var(--bg3); border:1px solid var(--orange); color:var(--text); font-size:12.5px; padding:9px 18px; border-radius:20px; opacity:0; transition:all .28s; z-index:999; white-space:nowrap; pointer-events:none; }
+
+  .toast {
+    position:fixed; bottom:28px; left:50%;
+    transform:translateX(-50%) translateY(18px);
+    background:var(--bg3); border:1px solid var(--orange); color:var(--text);
+    font-size:12.5px; padding:9px 18px; border-radius:20px; opacity:0;
+    transition:all .28s; z-index:999; white-space:nowrap; pointer-events:none;
+  }
   .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 </style>
 </head>
@@ -210,12 +398,12 @@
     <div class="today-spend">今日支出 <span id="todaySpend">RM0.00</span></div>
   </div>
   <div class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('jizhang')"><span>💬</span>记账</button>
-    <button class="tab-btn" onclick="switchTab('fixed')"><span>📌</span>固定</button>
-    <button class="tab-btn" onclick="switchTab('stats')"><span>📊</span>统计</button>
-    <button class="tab-btn" onclick="switchTab('records')"><span>📋</span>记录</button>
-    <button class="tab-btn" onclick="switchTab('query')"><span>🔍</span>查询</button>
-    <button class="tab-btn" onclick="switchTab('settings')"><span>⚙️</span>设置</button>
+    <button class="tab-btn active" onclick="switchTab('jizhang')"><span class="ti">💬</span>记账</button>
+    <button class="tab-btn" onclick="switchTab('fixed')"><span class="ti">📌</span>固定</button>
+    <button class="tab-btn" onclick="switchTab('stats')"><span class="ti">📊</span>统计</button>
+    <button class="tab-btn" onclick="switchTab('records')"><span class="ti">📋</span>记录</button>
+    <button class="tab-btn" onclick="switchTab('query')"><span class="ti">🔍</span>查询</button>
+    <button class="tab-btn" onclick="switchTab('settings')"><span class="ti">⚙️</span>设置</button>
   </div>
 </div>
 
@@ -234,7 +422,7 @@
     </div>
   </div>
   <div class="datetime-panel" id="datetimePanel">
-    <div class="dt-presets">
+    <div class="dt-presets" id="dtPresets">
       <button class="dt-preset active" onclick="setPreset('today',this)">今天</button>
       <button class="dt-preset" onclick="setPreset('yesterday',this)">昨天</button>
       <button class="dt-preset" onclick="setPreset('2daysago',this)">前天</button>
@@ -260,7 +448,10 @@
     <button class="add-btn" onclick="openAddFixed()">+ 添加</button>
   </div>
   <div id="fixedList"></div>
-  <div class="total-bar"><span class="label">每月固定总计</span><span class="amount" id="fixedTotal">RM0.00</span></div>
+  <div class="total-bar">
+    <span class="label">每月固定总计</span>
+    <span class="amount" id="fixedTotal">RM0.00</span>
+  </div>
   <button class="apply-btn" onclick="applyFixed()">📌 记录本月固定消费</button>
 </div>
 
@@ -279,8 +470,11 @@
     <div class="stat-card full">
       <div class="s-label" style="margin-bottom:13px;">支出分布</div>
       <div class="donut-wrap">
-        <svg width="88" height="88" viewBox="0 0 90 90" id="donutSvg"><circle cx="45" cy="45" r="36" fill="none" stroke="var(--bg4)" stroke-width="12"/><text x="45" y="49" text-anchor="middle" fill="var(--text3)" font-size="9" font-family="JetBrains Mono">暂无</text></svg>
-        <div id="donutLegend"><div style="font-size:11.5px;color:var(--text3);">本月暂无消费记录</div></div>
+        <svg class="donut-svg" width="88" height="88" viewBox="0 0 90 90" id="donutSvg">
+          <circle cx="45" cy="45" r="36" fill="none" stroke="var(--bg4)" stroke-width="12"/>
+          <text x="45" y="49" text-anchor="middle" fill="var(--text3)" font-size="9" font-family="JetBrains Mono">暂无</text>
+        </svg>
+        <div class="donut-legend" id="donutLegend"><div style="font-size:11.5px;color:var(--text3);">本月暂无消费记录</div></div>
       </div>
     </div>
     <div class="stat-card full">
@@ -303,16 +497,26 @@
 <!-- PAGE 5: 查询 -->
 <div class="page" id="page-query">
   <div class="query-section">
-    <div class="query-title"><span>🔍</span>自定义查询</div>
+    <div class="query-title"><span class="qt-icon">🔍</span>自定义查询</div>
     <div class="filter-grid">
       <div class="filter-field"><label>开始日期</label><input type="date" class="filter-input" id="qDateFrom"></div>
       <div class="filter-field"><label>结束日期</label><input type="date" class="filter-input" id="qDateTo"></div>
       <div class="filter-field"><label>类型</label>
-        <select class="filter-select" id="qType"><option value="">全部</option><option value="expense">支出</option><option value="income">收入</option><option value="saving">储蓄</option></select>
+        <select class="filter-select" id="qType">
+          <option value="">全部</option>
+          <option value="expense">支出</option>
+          <option value="income">收入</option>
+          <option value="saving">储蓄</option>
+        </select>
       </div>
       <div class="filter-field"><label>类别</label><select class="filter-select" id="qCategory"><option value="">全部类别</option></select></div>
       <div class="filter-field"><label>支付方式</label>
-        <select class="filter-select" id="qPayMethod"><option value="">全部</option><option value="Debit">Debit</option><option value="Credit">Credit</option><option value="Cash">Cash</option></select>
+        <select class="filter-select" id="qPayMethod">
+          <option value="">全部</option>
+          <option value="Debit">Debit</option>
+          <option value="Credit">Credit</option>
+          <option value="Cash">Cash</option>
+        </select>
       </div>
       <div class="filter-field"><label>金额 ≥ (RM)</label><input type="number" class="filter-input" id="qMinAmt" placeholder="0"></div>
       <div class="filter-field full"><label>关键词</label><input type="text" class="filter-input" id="qKeyword" placeholder="例：海底捞、餐饮"></div>
@@ -325,12 +529,14 @@
   <div class="query-results" id="queryResults" style="display:none;">
     <div class="result-header" id="querySummary"></div>
     <div class="export-row">
-      <button class="export-btn" onclick="exportCSV()"><span>📄</span>导出 CSV</button>
-      <button class="export-btn" onclick="exportTxt()"><span>📝</span>导出报告 TXT</button>
+      <button class="export-btn" onclick="exportCSV()"><span class="eb-icon">📄</span>导出 CSV</button>
+      <button class="export-btn" onclick="exportTxt()"><span class="eb-icon">📝</span>导出报告 TXT</button>
     </div>
     <div class="result-table-wrap">
-      <table class="result-table"><thead><tr><th>日期</th><th>类别</th><th>备注</th><th>方式</th><th>金额</th></tr></thead>
-      <tbody id="queryTableBody"></tbody></table>
+      <table class="result-table" id="queryTable">
+        <thead><tr><th>日期</th><th>类别</th><th>备注</th><th>方式</th><th>金额</th></tr></thead>
+        <tbody id="queryTableBody"></tbody>
+      </table>
     </div>
   </div>
 </div>
@@ -340,7 +546,10 @@
   <div class="settings-section">
     <div class="settings-section-title">预算</div>
     <div class="settings-group">
-      <div class="settings-item" onclick="editBudget()"><span class="s-emoji">💰</span><span class="s-name">月预算</span><span class="s-count" id="budgetDisplay">RM5,000</span><span class="s-arrow">›</span></div>
+      <div class="settings-item" onclick="editBudget()">
+        <span class="s-emoji">💰</span><span class="s-name">月预算</span>
+        <span class="s-count" id="budgetDisplay">RM5,000</span><span class="s-arrow">›</span>
+      </div>
     </div>
   </div>
   <div class="settings-section">
@@ -380,8 +589,10 @@
     <div class="field-group"><label>备注</label><input type="text" class="field-input" id="editNote" placeholder="备注/店名"></div>
     <div class="field-group"><label>支付方式</label>
       <select class="field-input" id="editPayMethod">
-        <option value="Debit">Debit</option><option value="Credit">Credit</option>
-        <option value="Cash">Cash</option><option value="其他">其他</option>
+        <option value="Debit">Debit</option>
+        <option value="Credit">Credit</option>
+        <option value="Cash">Cash</option>
+        <option value="其他">其他</option>
       </select>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
@@ -408,9 +619,10 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ===== STATE =====
 let state = {
-  records: [], fixedItems: [], budget: 5000,
+  records: [],
+  fixedItems: [],
+  budget: 5000,
   categories: {
     expense: [
       {emoji:'🍜',name:'餐饮'},{emoji:'🚗',name:'交通'},{emoji:'🛒',name:'购物'},
@@ -440,34 +652,34 @@ let currentRecordsMonth = new Date();
 let currentCatType = 'expense';
 let datePickerOpen = false;
 let pendingMsg = null;
-let editingRecordId = null;
 let lastQueryResults = [];
 
-function saveState(){ try{ localStorage.setItem('meelog', JSON.stringify(state)); }catch(e){} }
-function loadState(){ try{ const d=localStorage.getItem('meelog'); if(d) state=Object.assign(state,JSON.parse(d)); }catch(e){} }
+function saveState() { try { localStorage.setItem('meelog', JSON.stringify(state)); } catch(e){} }
+function loadState() {
+  try { const d = localStorage.getItem('meelog'); if(d) state = Object.assign(state, JSON.parse(d)); } catch(e){}
+}
 
 loadState();
 initDateDefaults();
 renderAll();
 initQueryFilters();
 
-function initDateDefaults(){
-  const now=new Date();
-  document.getElementById('inputDate').value=now.toISOString().split('T')[0];
-  document.getElementById('inputTime').value=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-  const y=now.getFullYear(), m=String(now.getMonth()+1).padStart(2,'0');
-  const lastDay=new Date(y,now.getMonth()+1,0).getDate();
-  document.getElementById('qDateFrom').value=`${y}-${m}-01`;
-  document.getElementById('qDateTo').value=`${y}-${m}-${String(lastDay).padStart(2,'0')}`;
+function initDateDefaults() {
+  const now = new Date();
+  document.getElementById('inputDate').value = now.toISOString().split('T')[0];
+  document.getElementById('inputTime').value = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  const y = now.getFullYear(), m = String(now.getMonth()+1).padStart(2,'0');
+  const lastDay = new Date(y, now.getMonth()+1, 0).getDate();
+  document.getElementById('qDateFrom').value = `${y}-${m}-01`;
+  document.getElementById('qDateTo').value = `${y}-${m}-${String(lastDay).padStart(2,'0')}`;
 }
 
-function renderAll(){ renderFixedList(); renderStats(); renderRecords(); updateTodaySpend(); updateSettingsCounts(); }
+function renderAll() { renderFixedList(); renderStats(); renderRecords(); updateTodaySpend(); updateSettingsCounts(); }
 
-// ===== TABS =====
-const TABS=['jizhang','fixed','stats','records','query','settings'];
-function switchTab(tab){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+const TABS = ['jizhang','fixed','stats','records','query','settings'];
+function switchTab(tab) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('page-'+tab).classList.add('active');
   document.querySelectorAll('.tab-btn')[TABS.indexOf(tab)].classList.add('active');
   if(tab==='stats') renderStats();
@@ -475,212 +687,191 @@ function switchTab(tab){
   if(tab==='query') initQueryFilters();
 }
 
-// ===== DATE =====
-function toggleDatePanel(){ datePickerOpen=!datePickerOpen; document.getElementById('datetimePanel').classList.toggle('open',datePickerOpen); }
-function setPreset(type,btn){
-  document.querySelectorAll('.dt-preset').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
-  const now=new Date(), d=new Date(now);
+function toggleDatePanel() {
+  datePickerOpen = !datePickerOpen;
+  document.getElementById('datetimePanel').classList.toggle('open', datePickerOpen);
+}
+function setPreset(type, btn) {
+  document.querySelectorAll('.dt-preset').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const now = new Date(), d = new Date(now);
   if(type==='yesterday') d.setDate(d.getDate()-1);
   if(type==='2daysago') d.setDate(d.getDate()-2);
-  document.getElementById('inputDate').value=d.toISOString().split('T')[0];
+  document.getElementById('inputDate').value = d.toISOString().split('T')[0];
   updateDateToggleLabel();
 }
-function onDateChange(){
-  document.querySelectorAll('.dt-preset').forEach(b=>b.classList.remove('active'));
+function onDateChange() {
+  document.querySelectorAll('.dt-preset').forEach(b => b.classList.remove('active'));
   document.querySelector('.dt-preset:last-child').classList.add('active');
   updateDateToggleLabel();
 }
-function updateDateToggleLabel(){
-  const val=document.getElementById('inputDate').value, now=new Date(), today=now.toISOString().split('T')[0];
-  const y=new Date(now); y.setDate(y.getDate()-1); const yest=y.toISOString().split('T')[0];
-  const d2=new Date(now); d2.setDate(d2.getDate()-2); const d2s=d2.toISOString().split('T')[0];
-  const labels={[today]:'今天',[yest]:'昨天',[d2s]:'前天'};
-  document.getElementById('dateToggleLabel').textContent=labels[val]||val;
-  document.getElementById('dateToggle').classList.toggle('custom',val!==today);
+function updateDateToggleLabel() {
+  const val = document.getElementById('inputDate').value;
+  const now = new Date(), today = now.toISOString().split('T')[0];
+  const y = new Date(now); y.setDate(y.getDate()-1); const yest = y.toISOString().split('T')[0];
+  const d2 = new Date(now); d2.setDate(d2.getDate()-2); const d2s = d2.toISOString().split('T')[0];
+  const labels = {[today]:'今天',[yest]:'昨天',[d2s]:'前天'};
+  document.getElementById('dateToggleLabel').textContent = labels[val] || val;
+  document.getElementById('dateToggle').classList.toggle('custom', val !== today);
 }
 
-// ===== CHAT =====
-function handleKey(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();} }
-function autoResize(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,90)+'px'; }
+function handleKey(e) { if(e.key==='Enter' && !e.shiftKey){e.preventDefault();sendMessage();} }
+function autoResize(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,90)+'px'; }
 
-function sendMessage(){
-  const input=document.getElementById('chatInput');
-  const text=input.value.trim(); if(!text) return;
-  input.value=''; input.style.height='auto';
-  addMsg(text,'user');
-  const typingId='typing_'+Date.now();
-  addMsg('...','bot',typingId);
-  setTimeout(async()=>{ document.getElementById(typingId)?.remove(); await processWithAI(text); }, 500);
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if(!text) return;
+  input.value = ''; input.style.height = 'auto';
+  addMsg(text, 'user');
+  const typingId = 'typing_' + Date.now();
+  addMsg('...', 'bot', typingId);
+  setTimeout(async () => {
+    document.getElementById(typingId)?.remove();
+    await processWithAI(text);
+  }, 500);
 }
 
-async function processWithAI(text){
-  const catList=state.categories.expense.map(c=>c.name).join('、');
-  const incList=state.categories.income.map(c=>c.name).join('、');
-  const prompt=`你是记账助手。用户输入：「${text}」
+async function processWithAI(text) {
+  const catList = state.categories.expense.map(c=>c.name).join('、');
+  const incList = state.categories.income.map(c=>c.name).join('、');
+  const prompt = `你是记账助手。用户输入：「${text}」
 返回JSON（只返回JSON）：
 {"type":"expense/income/saving/unclear","amount":数字,"category":"类别","note":"备注/店名","payMethod":"Debit/Credit/Cash/其他","needConfirm":true/false,"confirmOptions":["选项"]}
 支出类别：${catList}
 收入类别：${incList}
 收入关键词(薪水/收入/赚)→type=income，储蓄关键词(存款/基金)→type=saving`;
   try {
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
       method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,messages:[{role:'user',content:prompt}]})
+      body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:300, messages:[{role:'user',content:prompt}] })
     });
-    const data=await res.json();
-    const raw=data.content?.[0]?.text||'';
-    let json; try{ json=JSON.parse(raw.replace(/```json|```/g,'').trim()); }catch(e){ json=null; }
-    if(!json||json.amount===0){ addMsg('没找到金额，请重新输入，例：海底捞 120','bot'); return; }
-    // Check if AI-detected category is new
-    const allCatNames=[...state.categories.expense,...state.categories.income,...state.categories.saving].map(c=>c.name);
-    if(json.category && !allCatNames.includes(json.category) && json.category!=='其他'){
-      pendingMsg={...json, originalText:text};
-      showNewCatPrompt(json.category, json.amount); return;
-    }
-    if(json.needConfirm&&json.confirmOptions?.length){
-      pendingMsg={...json, originalText:text}; showCatPicker(json.confirmOptions,json.amount);
+    const data = await res.json();
+    const raw = data.content?.[0]?.text || '';
+    let json;
+    try { json = JSON.parse(raw.replace(/```json|```/g,'').trim()); } catch(e){ json=null; }
+    if(!json || json.amount===0){addMsg('没找到金额，请重新输入，例：海底捞 120','bot');return;}
+    if(json.needConfirm && json.confirmOptions?.length){
+      pendingMsg = {...json, originalText:text};
+      showCatPicker(json.confirmOptions, json.amount);
     } else { saveRecord(json); }
-  } catch(e){
-    const fb=simpleParse(text);
+  } catch(e) {
+    const fb = simpleParse(text);
     fb ? saveRecord(fb) : addMsg('❌ 无法解析，请检查输入格式','bot');
   }
 }
 
-function simpleParse(text){
-  const m=text.match(/(\d+(?:\.\d+)?)/); if(!m) return null;
-  const isIncome=['薪水','收入','工资','奖金','赚'].some(k=>text.includes(k));
+function simpleParse(text) {
+  const m = text.match(/(\d+(?:\.\d+)?)/);
+  if(!m) return null;
+  const isIncome = ['薪水','收入','工资','奖金','赚'].some(k=>text.includes(k));
   return {type:isIncome?'income':'expense',amount:parseFloat(m[1]),
     category:isIncome?'薪水':'其他',note:text.replace(m[0],'').trim().slice(0,20),payMethod:'Debit'};
 }
 
-// ===== NEW CATEGORY PROMPT IN CHAT =====
-function showNewCatPrompt(catName, amount){
-  const area=document.getElementById('chatArea');
-  const el=document.createElement('div');
-  el.className='cat-picker'; el.id='newCatPromptEl';
-  el.innerHTML=`
-    <p>「<b>${catName}</b>」不在类别列表里</p>
-    <p style="font-size:11px;color:var(--text3);margin-bottom:10px;">选择 emoji 后新增，或直接归入「其他」</p>
-    <div style="display:flex;gap:7px;margin-bottom:10px;align-items:center;">
-      <input type="text" id="newCatEmojiInline" placeholder="😊" maxlength="2"
-        style="width:44px;background:var(--bg4);border:1.5px solid var(--bg4);border-radius:8px;color:var(--text);font-size:18px;padding:6px;text-align:center;outline:none;font-family:inherit;">
-      <span style="font-size:13.5px;font-weight:600;color:var(--text);">${catName}</span>
-    </div>
-    <div style="display:flex;gap:7px;">
-      <button onclick="confirmNewCat('${catName}')"
-        style="flex:1;background:var(--orange);border:none;border-radius:9px;color:#F0FAF6;font-family:'Nunito',sans-serif;font-size:12.5px;font-weight:700;padding:9px;cursor:pointer;">
-        ✅ 新增并记录
-      </button>
-      <button onclick="skipNewCat()"
-        style="flex:0 0 80px;background:var(--bg4);border:none;border-radius:9px;color:var(--text2);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:9px;cursor:pointer;">
-        归入其他
-      </button>
-    </div>`;
-  area.appendChild(el); area.scrollTop=area.scrollHeight;
-}
-
-function confirmNewCat(catName){
-  const emoji=document.getElementById('newCatEmojiInline')?.value.trim()||'📦';
-  state.categories.expense.push({emoji, name:catName});
-  saveState(); updateSettingsCounts();
-  document.getElementById('newCatPromptEl')?.remove();
-  addMsg(`✅ 已新增类别 ${emoji} <b>${catName}</b>`,'bot');
-  if(pendingMsg){ pendingMsg.category=catName; pendingMsg.emoji=emoji; saveRecord(pendingMsg); pendingMsg=null; }
-}
-
-function skipNewCat(){
-  document.getElementById('newCatPromptEl')?.remove();
-  if(pendingMsg){ pendingMsg.category='其他'; pendingMsg.emoji='📦'; saveRecord(pendingMsg); pendingMsg=null; }
-}
-
-// ===== CAT PICKER =====
-function showCatPicker(options, amount){
-  const area=document.getElementById('chatArea');
-  const el=document.createElement('div'); el.className='cat-picker'; el.id='catPickerEl';
-  const cats=state.categories.expense;
-  el.innerHTML=`<p>「RM${amount}」应归入哪个类别？</p><div class="cat-grid">${
-    options.map(opt=>{ const c=cats.find(c=>c.name===opt)||{emoji:'📦',name:opt};
+function showCatPicker(options, amount) {
+  const area = document.getElementById('chatArea');
+  const el = document.createElement('div');
+  el.className='cat-picker'; el.id='catPickerEl';
+  const cats = state.categories.expense;
+  el.innerHTML = `<p>「RM${amount}」应归入哪个类别？</p><div class="cat-grid">${
+    options.map(opt=>{const c=cats.find(c=>c.name===opt)||{emoji:'📦',name:opt};
       return `<div class="cat-chip" onclick="selectCat('${opt}')"><span class="emoji">${c.emoji}</span><span class="name">${c.name}</span></div>`;
     }).join('')}</div>`;
   area.appendChild(el); area.scrollTop=area.scrollHeight;
 }
 
-function selectCat(catName){
+function selectCat(catName) {
   document.getElementById('catPickerEl')?.remove();
-  if(pendingMsg){ pendingMsg.category=catName; saveRecord(pendingMsg); pendingMsg=null; }
+  if(pendingMsg){pendingMsg.category=catName;saveRecord(pendingMsg);pendingMsg=null;}
 }
 
-function saveRecord(json){
-  const allCats=[...state.categories.expense,...state.categories.income,...state.categories.saving];
-  const cat=allCats.find(c=>c.name===json.category)||{emoji:'📦',name:json.category||'其他'};
-  const dateVal=document.getElementById('inputDate').value;
-  const timeVal=document.getElementById('inputTime').value;
-  const record={id:Date.now()+Math.random(),type:json.type||'expense',amount:json.amount,
-    category:cat.name,emoji:cat.emoji,note:json.note||'',payMethod:json.payMethod||'Debit',date:dateVal,time:timeVal};
+function saveRecord(json) {
+  const allCats = [...state.categories.expense,...state.categories.income,...state.categories.saving];
+  const cat = allCats.find(c=>c.name===json.category)||{emoji:'📦',name:json.category||'其他'};
+  const dateVal = document.getElementById('inputDate').value;
+  const timeVal = document.getElementById('inputTime').value;
+  const record = {
+    id: Date.now()+Math.random(), type: json.type||'expense', amount: json.amount,
+    category: cat.name, emoji: cat.emoji, note: json.note||'',
+    payMethod: json.payMethod||'Debit', date: dateVal, time: timeVal
+  };
   state.records.push(record); saveState();
-  const sign=record.type==='expense'?'-':'+';
-  const color=record.type==='expense'?'var(--red)':'var(--green)';
+  const sign = record.type==='expense'?'-':'+';
+  const color = record.type==='expense'?'var(--red)':'var(--green)';
   addMsg(`${cat.emoji} <b>${cat.name}</b> <span style="color:${color};font-family:JetBrains Mono;font-weight:700;">${sign}RM${record.amount.toFixed(2)}</span><br><small style="color:var(--text3);">${record.note||''} · ${record.payMethod} · ${record.date}</small>`,'bot');
-  updateTodaySpend(); showToast(`✅ 已记录 ${sign}RM${record.amount.toFixed(2)}`);
+  updateTodaySpend();
+  showToast(`✅ 已记录 ${sign}RM${record.amount.toFixed(2)}`);
 }
 
-function addMsg(text, type, id){
-  const area=document.getElementById('chatArea');
-  const div=document.createElement('div');
+function addMsg(text, type, id) {
+  const area = document.getElementById('chatArea');
+  const div = document.createElement('div');
   div.className=`msg msg-${type}`; if(id) div.id=id; div.innerHTML=text;
   area.appendChild(div); area.scrollTop=area.scrollHeight;
 }
 
-// ===== FIXED =====
-function renderFixedList(){
-  const list=document.getElementById('fixedList');
-  if(!state.fixedItems.length){ list.innerHTML='<div class="empty-state"><div class="e-icon">📋</div><p>暂无固定开销<br>点击添加按钮来设置</p></div>'; document.getElementById('fixedTotal').textContent='RM0.00'; return; }
+function renderFixedList() {
+  const list = document.getElementById('fixedList');
+  if(!state.fixedItems.length){
+    list.innerHTML='<div class="empty-state"><div class="e-icon">📋</div><p>暂无固定开销<br>点击添加按钮来设置</p></div>';
+    document.getElementById('fixedTotal').textContent='RM0.00'; return;
+  }
   let total=0;
-  list.innerHTML=state.fixedItems.map((item,i)=>{ total+=item.amount;
+  list.innerHTML=state.fixedItems.map((item,i)=>{total+=item.amount;
     return `<div class="fixed-item"><span class="fixed-emoji">${item.emoji}</span>
       <div class="fixed-info"><div class="fixed-name">${item.name}</div><div class="fixed-sub">${item.category}</div></div>
       <span class="fixed-amount">RM${item.amount.toFixed(2)}</span>
-      <button class="fixed-del" onclick="deleteFixed(${i})">✕</button></div>`; }).join('');
+      <button class="fixed-del" onclick="deleteFixed(${i})">✕</button></div>`;}).join('');
   document.getElementById('fixedTotal').textContent=`RM${total.toFixed(2)}`;
 }
-function openAddFixed(){
+
+function openAddFixed() {
   const cats=state.categories.expense;
   document.getElementById('fixedCatSelect').innerHTML=cats.map((c,i)=>
-    `<div class="cat-select-chip ${i===0?'selected':''}" onclick="selectFixedCat(this)"><span class="e">${c.emoji}</span><span class="n">${c.name}</span></div>`).join('');
+    `<div class="cat-select-chip ${i===0?'selected':''}" onclick="selectFixedCat(this)">
+      <span class="e">${c.emoji}</span><span class="n">${c.name}</span></div>`).join('');
   document.getElementById('fixedName').value=''; document.getElementById('fixedAmtInput').value='';
   document.getElementById('addFixedModal').classList.add('open');
 }
-function selectFixedCat(el){ document.querySelectorAll('#fixedCatSelect .cat-select-chip').forEach(c=>c.classList.remove('selected')); el.classList.add('selected'); }
-function addFixed(){
-  const name=document.getElementById('fixedName').value.trim(), amt=parseFloat(document.getElementById('fixedAmtInput').value);
-  if(!name||isNaN(amt)||amt<=0){ showToast('⚠️ 请填写名称和金额'); return; }
+function selectFixedCat(el) {
+  document.querySelectorAll('#fixedCatSelect .cat-select-chip').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function addFixed() {
+  const name=document.getElementById('fixedName').value.trim();
+  const amt=parseFloat(document.getElementById('fixedAmtInput').value);
+  if(!name||isNaN(amt)||amt<=0){showToast('⚠️ 请填写名称和金额');return;}
   const sel=document.querySelector('#fixedCatSelect .selected');
   state.fixedItems.push({name,amount:amt,category:sel?.querySelector('.n').textContent||'其他',emoji:sel?.querySelector('.e').textContent||'📦'});
   saveState(); closeModal('addFixedModal'); renderFixedList(); showToast('✅ 已添加');
 }
-function deleteFixed(i){ state.fixedItems.splice(i,1); saveState(); renderFixedList(); }
+function deleteFixed(i){state.fixedItems.splice(i,1);saveState();renderFixedList();}
 function applyFixed(){
-  if(!state.fixedItems.length){ showToast('⚠️ 没有固定开销'); return; }
-  const today=new Date(), ds=today.toISOString().split('T')[0];
+  if(!state.fixedItems.length){showToast('⚠️ 没有固定开销');return;}
+  const today=new Date(),ds=today.toISOString().split('T')[0];
   const ts=`${String(today.getHours()).padStart(2,'0')}:${String(today.getMinutes()).padStart(2,'0')}`;
-  state.fixedItems.forEach(item=>{ state.records.push({id:Date.now()+Math.random(),type:'expense',amount:item.amount,category:item.category,emoji:item.emoji,note:item.name+' (固定)',payMethod:'Debit',date:ds,time:ts}); });
+  state.fixedItems.forEach(item=>{
+    state.records.push({id:Date.now()+Math.random(),type:'expense',amount:item.amount,
+      category:item.category,emoji:item.emoji,note:item.name+' (固定)',payMethod:'Debit',date:ds,time:ts});
+  });
   saveState(); updateTodaySpend(); showToast(`✅ 已记录 ${state.fixedItems.length} 条固定消费`);
 }
 
-// ===== STATS =====
-function changeStatsMonth(d){ currentStatsMonth=new Date(currentStatsMonth.getFullYear(),currentStatsMonth.getMonth()+d,1); renderStats(); }
+function changeStatsMonth(d){currentStatsMonth=new Date(currentStatsMonth.getFullYear(),currentStatsMonth.getMonth()+d,1);renderStats();}
 function renderStats(){
-  const y=currentStatsMonth.getFullYear(), m=String(currentStatsMonth.getMonth()+1).padStart(2,'0'), ms=`${y}-${m}`;
+  const y=currentStatsMonth.getFullYear(),m=String(currentStatsMonth.getMonth()+1).padStart(2,'0'),ms=`${y}-${m}`;
   document.getElementById('statsMonthLabel').textContent=ms;
   const recs=state.records.filter(r=>r.date.startsWith(ms));
-  const exp=recs.filter(r=>r.type==='expense'), inc=recs.filter(r=>r.type==='income');
-  const ts=exp.reduce((s,r)=>s+r.amount,0), ti=inc.reduce((s,r)=>s+r.amount,0), bal=ti-ts;
+  const exp=recs.filter(r=>r.type==='expense'),inc=recs.filter(r=>r.type==='income');
+  const ts=exp.reduce((s,r)=>s+r.amount,0),ti=inc.reduce((s,r)=>s+r.amount,0),bal=ti-ts;
   document.getElementById('statBudget').textContent=`RM${state.budget.toLocaleString()}`;
   document.getElementById('statSpent').textContent=`RM${ts.toFixed(2)}`;
   document.getElementById('statIncome').textContent=`RM${ti.toFixed(2)}`;
   document.getElementById('statBalance').textContent=`RM${bal.toFixed(2)}`;
   document.getElementById('statBalance').className=`s-val ${bal>=0?'green':'red'}`;
-  const catT={}; exp.forEach(r=>{ catT[r.category]=(catT[r.category]||0)+r.amount; });
+  const catT={};
+  exp.forEach(r=>{catT[r.category]=(catT[r.category]||0)+r.amount;});
   const sorted=Object.entries(catT).sort((a,b)=>b[1]-a[1]);
   const colors=['#3DD9A4','#5BA8F5','#FF6B8A','#9B8FFF','#4ECDC4','#FF8C42','#95C623','#F5A623'];
   if(!sorted.length){
@@ -688,42 +879,41 @@ function renderStats(){
     document.getElementById('donutLegend').innerHTML='<div style="font-size:11.5px;color:var(--text3);">暂无消费记录</div>';
     document.getElementById('progressSection').innerHTML='<div style="font-size:11.5px;color:var(--text3);">暂无数据</div>'; return;
   }
-  const total=sorted.reduce((s,[,v])=>s+v,0), circ=2*Math.PI*36;
-  let off=0, paths='';
-  sorted.forEach(([,amt],i)=>{ const p=amt/total, dash=p*circ, color=colors[i%8];
-    paths+=`<circle cx="45" cy="45" r="36" fill="none" stroke="${color}" stroke-width="12" stroke-dasharray="${dash} ${circ}" stroke-dashoffset="${-off*circ}" transform="rotate(-90 45 45)"/>`;off+=p; });
+  const total=sorted.reduce((s,[,v])=>s+v,0),circ=2*Math.PI*36;
+  let off=0,paths='';
+  sorted.forEach(([,amt],i)=>{const p=amt/total,dash=p*circ,color=colors[i%colors.length];
+    paths+=`<circle cx="45" cy="45" r="36" fill="none" stroke="${color}" stroke-width="12" stroke-dasharray="${dash} ${circ}" stroke-dashoffset="${-off*circ}" transform="rotate(-90 45 45)"/>`;off+=p;});
   document.getElementById('donutSvg').innerHTML=paths+`<text x="45" y="45" text-anchor="middle" fill="var(--text2)" font-size="8">RM</text><text x="45" y="55" text-anchor="middle" fill="var(--text)" font-size="9" font-weight="bold" font-family="JetBrains Mono">${(total/1000).toFixed(1)}k</text>`;
-  document.getElementById('donutLegend').innerHTML=sorted.slice(0,6).map(([cat,amt],i)=>{ const em=state.categories.expense.find(c=>c.name===cat)?.emoji||'📦';
-    return `<div class="legend-item"><div class="legend-dot" style="background:${colors[i%8]}"></div><span class="legend-name">${em} ${cat}</span><span class="legend-amt">RM${amt.toFixed(0)}</span></div>`; }).join('');
-  document.getElementById('progressSection').innerHTML=sorted.slice(0,6).map(([cat,amt],i)=>{ const pct=Math.min((amt/state.budget)*100,100), em=state.categories.expense.find(c=>c.name===cat)?.emoji||'📦';
-    return `<div class="prog-item"><div class="prog-row"><span class="prog-name">${em} ${cat}</span><span class="prog-amt" style="color:${colors[i%8]}">RM${amt.toFixed(0)}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${pct}%;background:${colors[i%8]}"></div></div></div>`; }).join('');
+  document.getElementById('donutLegend').innerHTML=sorted.slice(0,6).map(([cat,amt],i)=>{
+    const em=state.categories.expense.find(c=>c.name===cat)?.emoji||'📦';
+    return `<div class="legend-item"><div class="legend-dot" style="background:${colors[i%8]}"></div><span class="legend-name">${em} ${cat}</span><span class="legend-amt">RM${amt.toFixed(0)}</span></div>`;}).join('');
+  document.getElementById('progressSection').innerHTML=sorted.slice(0,6).map(([cat,amt],i)=>{
+    const pct=Math.min((amt/state.budget)*100,100),em=state.categories.expense.find(c=>c.name===cat)?.emoji||'📦';
+    return `<div class="prog-item"><div class="prog-row"><span class="prog-name">${em} ${cat}</span><span class="prog-amt" style="color:${colors[i%8]}">RM${amt.toFixed(0)}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${pct}%;background:${colors[i%8]}"></div></div></div>`;}).join('');
 }
 
-// ===== RECORDS =====
-function changeRecordsMonth(d){ currentRecordsMonth=new Date(currentRecordsMonth.getFullYear(),currentRecordsMonth.getMonth()+d,1); renderRecords(); }
+function changeRecordsMonth(d){currentRecordsMonth=new Date(currentRecordsMonth.getFullYear(),currentRecordsMonth.getMonth()+d,1);renderRecords();}
 function renderRecords(){
-  const y=currentRecordsMonth.getFullYear(), m=String(currentRecordsMonth.getMonth()+1).padStart(2,'0'), ms=`${y}-${m}`;
+  const y=currentRecordsMonth.getFullYear(),m=String(currentRecordsMonth.getMonth()+1).padStart(2,'0'),ms=`${y}-${m}`;
   document.getElementById('recordsMonthLabel').textContent=ms;
   const recs=state.records.filter(r=>r.date.startsWith(ms)).sort((a,b)=>(b.date+b.time).localeCompare(a.date+a.time));
   const list=document.getElementById('recordsList');
-  if(!recs.length){ list.innerHTML='<div class="empty-state"><div class="e-icon">📭</div><p>本月暂无记录<br>在记账页面输入消费吧</p></div>'; return; }
+  if(!recs.length){list.innerHTML='<div class="empty-state"><div class="e-icon">📭</div><p>本月暂无记录<br>在记账页面输入消费吧</p></div>';return;}
   const groups={};
-  recs.forEach(r=>{ if(!groups[r.date]) groups[r.date]=[]; groups[r.date].push(r); });
+  recs.forEach(r=>{if(!groups[r.date])groups[r.date]=[];groups[r.date].push(r);});
   const dn=['日','一','二','三','四','五','六'];
   list.innerHTML=Object.entries(groups).sort((a,b)=>b[0].localeCompare(a[0])).map(([date,rs])=>{
-    const dw=new Date(date+'T12:00:00'), inc=rs.filter(r=>r.type==='income').reduce((s,r)=>s+r.amount,0), exp=rs.filter(r=>r.type==='expense').reduce((s,r)=>s+r.amount,0);
+    const dw=new Date(date+'T12:00:00'),inc=rs.filter(r=>r.type==='income').reduce((s,r)=>s+r.amount,0),exp=rs.filter(r=>r.type==='expense').reduce((s,r)=>s+r.amount,0);
     const sh=[inc>0?`<span class="inc">+RM${inc.toFixed(0)}</span>`:'',exp>0?`<span class="exp">-RM${exp.toFixed(0)}</span>`:''].filter(Boolean).join(' ');
     return `<div class="day-group"><div class="day-header"><span class="day-label">${date.slice(5)} · 星期${dn[dw.getDay()]}</span><span class="day-summary">${sh}</span></div>${
       rs.map(r=>`<div class="record-item"><span class="record-emoji">${r.emoji}</span>
         <div class="record-info"><div class="record-cat">${r.category}</div><div class="record-sub">${r.note||r.category} · ${r.payMethod} · ${r.time}</div></div>
         <div class="record-right"><div class="record-amt ${r.type==='expense'?'neg':'pos'}">${r.type==='expense'?'-':'+'}RM${r.amount.toFixed(2)}</div></div>
-        <button class="record-edit" onclick="editRecord(${r.id})" title="编辑">✏️</button>
-        <button class="record-del" onclick="deleteRecord(${r.id})" title="删除">✕</button></div>`).join('')}</div>`;
-  }).join('');
+        <button class="record-edit" onclick="editRecord(${r.id})">✏️</button>
+        <button class="record-del" onclick="deleteRecord(${r.id})">✕</button></div>`).join('')}</div>`;}).join('');
 }
-function deleteRecord(id){ state.records=state.records.filter(r=>r.id!==id); saveState(); renderRecords(); updateTodaySpend(); showToast('🗑️ 已删除'); }
-
-// ===== EDIT RECORD =====
+function deleteRecord(id){state.records=state.records.filter(r=>r.id!==id);saveState();renderRecords();updateTodaySpend();showToast('🗑️ 已删除');}
+let editingRecordId = null;
 function editRecord(id){
   const r=state.records.find(r=>r.id===id); if(!r) return;
   editingRecordId=id;
@@ -732,6 +922,7 @@ function editRecord(id){
   document.getElementById('editDate').value=r.date;
   document.getElementById('editTime').value=r.time;
   document.getElementById('editPayMethod').value=r.payMethod||'Debit';
+  // build category chips
   const type=r.type||'expense';
   const cats=type==='income'?state.categories.income:type==='saving'?state.categories.saving:state.categories.expense;
   document.getElementById('editCatSelect').innerHTML=cats.map(c=>
@@ -739,22 +930,24 @@ function editRecord(id){
       <span class="e">${c.emoji}</span><span class="n">${c.name}</span></div>`).join('');
   document.getElementById('editRecordModal').classList.add('open');
 }
-function selectEditCat(el){ document.querySelectorAll('#editCatSelect .cat-select-chip').forEach(c=>c.classList.remove('selected')); el.classList.add('selected'); }
+function selectEditCat(el){
+  document.querySelectorAll('#editCatSelect .cat-select-chip').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+}
 function saveEditRecord(){
   const r=state.records.find(r=>r.id===editingRecordId); if(!r) return;
   const amt=parseFloat(document.getElementById('editAmt').value);
-  if(isNaN(amt)||amt<=0){ showToast('⚠️ 请输入有效金额'); return; }
+  if(isNaN(amt)||amt<=0){showToast('⚠️ 请输入有效金额');return;}
   const sel=document.querySelector('#editCatSelect .selected');
   r.amount=amt;
   r.note=document.getElementById('editNote').value.trim();
   r.date=document.getElementById('editDate').value;
   r.time=document.getElementById('editTime').value;
   r.payMethod=document.getElementById('editPayMethod').value;
-  if(sel){ r.category=sel.querySelector('.n').textContent; r.emoji=sel.querySelector('.e').textContent; }
+  if(sel){r.category=sel.querySelector('.n').textContent;r.emoji=sel.querySelector('.e').textContent;}
   saveState(); closeModal('editRecordModal'); renderRecords(); updateTodaySpend(); showToast('✅ 已更新');
 }
 
-// ===== QUERY =====
 function initQueryFilters(){
   const sel=document.getElementById('qCategory');
   const allCats=[...state.categories.expense,...state.categories.income,...state.categories.saving];
@@ -762,9 +955,9 @@ function initQueryFilters(){
   sel.innerHTML='<option value="">全部类别</option>'+unique.map(n=>`<option value="${n}">${n}</option>`).join('');
 }
 function runQuery(){
-  const from=document.getElementById('qDateFrom').value, to=document.getElementById('qDateTo').value;
-  const type=document.getElementById('qType').value, cat=document.getElementById('qCategory').value;
-  const pay=document.getElementById('qPayMethod').value, minAmt=parseFloat(document.getElementById('qMinAmt').value)||0;
+  const from=document.getElementById('qDateFrom').value,to=document.getElementById('qDateTo').value;
+  const type=document.getElementById('qType').value,cat=document.getElementById('qCategory').value;
+  const pay=document.getElementById('qPayMethod').value,minAmt=parseFloat(document.getElementById('qMinAmt').value)||0;
   const kw=document.getElementById('qKeyword').value.trim().toLowerCase();
   let results=state.records.filter(r=>{
     if(from&&r.date<from)return false; if(to&&r.date>to)return false;
@@ -773,14 +966,20 @@ function runQuery(){
     if(kw&&!r.category.toLowerCase().includes(kw)&&!(r.note||'').toLowerCase().includes(kw))return false;
     return true;
   }).sort((a,b)=>(b.date+b.time).localeCompare(a.date+a.time));
-  lastQueryResults=results; renderQueryResults(results,from,to);
+  lastQueryResults=results;
+  renderQueryResults(results,from,to);
 }
 function renderQueryResults(results,from,to){
   const wrap=document.getElementById('queryResults');
-  if(!results.length){ wrap.style.display='block'; document.getElementById('querySummary').innerHTML=`<div style="text-align:center;color:var(--text3);padding:10px;">没有符合条件的记录</div>`; document.getElementById('queryTableBody').innerHTML=''; document.querySelector('.export-row').style.display='none'; return; }
+  if(!results.length){
+    wrap.style.display='block';
+    document.getElementById('querySummary').innerHTML=`<div style="text-align:center;color:var(--text3);padding:10px;">没有符合条件的记录</div>`;
+    document.getElementById('queryTableBody').innerHTML='';
+    document.querySelector('.export-row').style.display='none'; return;
+  }
   document.querySelector('.export-row').style.display='grid';
-  const exp=results.filter(r=>r.type==='expense'), inc=results.filter(r=>r.type==='income');
-  const te=exp.reduce((s,r)=>s+r.amount,0), ti=inc.reduce((s,r)=>s+r.amount,0);
+  const exp=results.filter(r=>r.type==='expense'),inc=results.filter(r=>r.type==='income');
+  const te=exp.reduce((s,r)=>s+r.amount,0),ti=inc.reduce((s,r)=>s+r.amount,0);
   document.getElementById('querySummary').innerHTML=`
     <div class="result-header-row"><span class="rh-label">查询范围</span><span class="rh-val orange">${from||'全部'} ~ ${to||'全部'}</span></div>
     <div class="result-header-row"><span class="rh-label">共 ${results.length} 笔记录</span></div>
@@ -788,39 +987,48 @@ function renderQueryResults(results,from,to){
     <div class="result-header-row"><span class="rh-label">总收入</span><span class="rh-val green">+RM${ti.toFixed(2)}</span></div>
     <div class="result-header-row"><span class="rh-label">净额</span><span class="rh-val ${ti-te>=0?'green':'red'}">${ti-te>=0?'+':'-'}RM${Math.abs(ti-te).toFixed(2)}</span></div>`;
   document.getElementById('queryTableBody').innerHTML=results.map(r=>`
-    <tr><td>${r.date}<br><span style="color:var(--text3);font-size:10px;">${r.time}</span></td>
-    <td>${r.emoji} ${r.category}</td><td style="color:var(--text2);font-size:11px;">${r.note||'—'}</td>
-    <td style="font-size:10.5px;color:var(--text3);">${r.payMethod}</td>
-    <td class="td-amt ${r.type==='expense'?'td-neg':'td-pos'}">${r.type==='expense'?'-':'+'}RM${r.amount.toFixed(2)}</td></tr>`).join('');
+    <tr>
+      <td>${r.date}<br><span style="color:var(--text3);font-size:10px;">${r.time}</span></td>
+      <td>${r.emoji} ${r.category}</td>
+      <td style="color:var(--text2);font-size:11px;">${r.note||'—'}</td>
+      <td style="font-size:10.5px;color:var(--text3);">${r.payMethod}</td>
+      <td class="td-amt ${r.type==='expense'?'td-neg':'td-pos'}">${r.type==='expense'?'-':'+'}RM${r.amount.toFixed(2)}</td>
+    </tr>`).join('');
   wrap.style.display='block';
 }
 function resetQuery(){
-  initDateDefaults(); ['qType','qCategory','qPayMethod'].forEach(id=>document.getElementById(id).value='');
+  initDateDefaults();
+  ['qType','qCategory','qPayMethod'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('qMinAmt').value=''; document.getElementById('qKeyword').value='';
   document.getElementById('queryResults').style.display='none'; lastQueryResults=[];
 }
 function exportCSV(){
-  if(!lastQueryResults.length){ showToast('⚠️ 请先执行查询'); return; }
+  if(!lastQueryResults.length){showToast('⚠️ 请先执行查询');return;}
   const header='日期,时间,类型,类别,备注,支付方式,金额\n';
   const rows=lastQueryResults.map(r=>`${r.date},${r.time},${r.type==='expense'?'支出':r.type==='income'?'收入':'储蓄'},${r.category},"${r.note||''}",${r.payMethod},${r.type==='expense'?-r.amount:r.amount}`).join('\n');
-  download('\uFEFF'+header+rows,'meelog-export.csv','text/csv;charset=utf-8;'); showToast('✅ CSV 已导出');
+  download('\uFEFF'+header+rows,'meelog-export.csv','text/csv;charset=utf-8;');
+  showToast('✅ CSV 已导出');
 }
 function exportTxt(){
-  if(!lastQueryResults.length){ showToast('⚠️ 请先执行查询'); return; }
-  const from=document.getElementById('qDateFrom').value, to=document.getElementById('qDateTo').value;
-  const exp=lastQueryResults.filter(r=>r.type==='expense'), inc=lastQueryResults.filter(r=>r.type==='income');
-  const te=exp.reduce((s,r)=>s+r.amount,0), ti=inc.reduce((s,r)=>s+r.amount,0);
-  const catMap={}; exp.forEach(r=>{ catMap[r.category]=(catMap[r.category]||0)+r.amount; });
+  if(!lastQueryResults.length){showToast('⚠️ 请先执行查询');return;}
+  const from=document.getElementById('qDateFrom').value,to=document.getElementById('qDateTo').value;
+  const exp=lastQueryResults.filter(r=>r.type==='expense'),inc=lastQueryResults.filter(r=>r.type==='income');
+  const te=exp.reduce((s,r)=>s+r.amount,0),ti=inc.reduce((s,r)=>s+r.amount,0);
+  const catMap={};exp.forEach(r=>{catMap[r.category]=(catMap[r.category]||0)+r.amount;});
   const catBreakdown=Object.entries(catMap).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`  ${k.padEnd(12,'　')}: RM${v.toFixed(2)}`).join('\n');
-  const txt=`========================================\n  MeeLog 消费报告\n  生成时间：${new Date().toLocaleString('zh-CN')}\n========================================\n查询范围  : ${from} ~ ${to}\n记录笔数  : ${lastQueryResults.length} 笔\n----------------------------------------\n总支出    : RM${te.toFixed(2)}\n总收入    : RM${ti.toFixed(2)}\n净额      : ${ti-te>=0?'+':'-'}RM${Math.abs(ti-te).toFixed(2)}\n----------------------------------------\n支出类别分布：\n${catBreakdown||'  暂无支出'}\n----------------------------------------\n详细记录：\n${lastQueryResults.map(r=>`  ${r.date} ${r.time}  ${(r.type==='expense'?'-':'+')+' RM'+r.amount.toFixed(2).padStart(8)}  ${r.emoji}${r.category}  ${r.note||''}  [${r.payMethod}]`).join('\n')}\n========================================`;
-  download(txt,'meelog-report.txt','text/plain;charset=utf-8;'); showToast('✅ 报告已导出');
+  const txt=`========================================\n  MeeLog 消费报告\n  生成时间：${new Date().toLocaleString('zh-CN')}\n========================================\n查询范围  : ${from} ~ ${to}\n记录笔数  : ${lastQueryResults.length} 笔\n----------------------------------------\n总支出    : RM${te.toFixed(2)}\n总收入    : RM${ti.toFixed(2)}\n净额      : ${ti-te>=0?'+':'-'}RM${Math.abs(ti-te).toFixed(2)}\n----------------------------------------\n支出类别分布：\n${catBreakdown||'  暂无支出'}\n----------------------------------------\n详细记录：\n${lastQueryResults.map(r=>`  ${r.date} ${r.time}  ${(r.type==='expense'?'-':'+')+' RM'+r.amount.toFixed(2).padStart(8)}  ${r.emoji}${r.category.padEnd(8,'　')}  ${r.note||''}  [${r.payMethod}]`).join('\n')}\n========================================`;
+  download(txt,'meelog-report.txt','text/plain;charset=utf-8;');
+  showToast('✅ 报告已导出');
 }
-function download(content,filename,mime){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([content],{type:mime})); a.download=filename; a.click(); }
+function download(content,filename,mime){
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([content],{type:mime}));
+  a.download=filename; a.click();
+}
 
-// ===== SETTINGS =====
 function editBudget(){
   const v=prompt(`设置月预算 (当前: RM${state.budget}):`,state.budget);
-  if(v!==null&&!isNaN(parseFloat(v))){ state.budget=parseFloat(v); saveState(); document.getElementById('budgetDisplay').textContent=`RM${state.budget.toLocaleString()}`; showToast('✅ 预算已更新'); }
+  if(v!==null&&!isNaN(parseFloat(v))){state.budget=parseFloat(v);saveState();document.getElementById('budgetDisplay').textContent=`RM${state.budget.toLocaleString()}`;showToast('✅ 预算已更新');}
 }
 function openCatModal(type){
   currentCatType=type;
@@ -834,31 +1042,36 @@ function renderCatManageList(){
     `<div class="cat-manage-item"><span class="cat-manage-emoji">${c.emoji}</span><span class="cat-manage-name">${c.name}</span><button class="cat-manage-del" onclick="deleteCat(${i})">✕</button></div>`).join('');
 }
 function addCat(){
-  const em=document.getElementById('newCatEmoji').value.trim()||'📦', nm=document.getElementById('newCatName').value.trim();
-  if(!nm){ showToast('⚠️ 请输入类别名称'); return; }
-  state.categories[currentCatType].push({emoji:em,name:nm}); saveState(); renderCatManageList(); updateSettingsCounts();
-  document.getElementById('newCatEmoji').value=''; document.getElementById('newCatName').value=''; showToast('✅ 已添加');
+  const em=document.getElementById('newCatEmoji').value.trim()||'📦';
+  const nm=document.getElementById('newCatName').value.trim();
+  if(!nm){showToast('⚠️ 请输入类别名称');return;}
+  state.categories[currentCatType].push({emoji:em,name:nm});saveState();renderCatManageList();updateSettingsCounts();
+  document.getElementById('newCatEmoji').value='';document.getElementById('newCatName').value='';showToast('✅ 已添加');
 }
-function deleteCat(i){ state.categories[currentCatType].splice(i,1); saveState(); renderCatManageList(); updateSettingsCounts(); }
+function deleteCat(i){state.categories[currentCatType].splice(i,1);saveState();renderCatManageList();updateSettingsCounts();}
 function updateSettingsCounts(){
   document.getElementById('expenseCatCount').textContent=state.categories.expense.length;
   document.getElementById('incomeCatCount').textContent=state.categories.income.length;
   document.getElementById('savingCatCount').textContent=state.categories.saving.length;
   document.getElementById('fixedCatCount').textContent=state.categories.fixed.length;
 }
-function clearData(){ if(confirm('确定要清除所有记录吗？此操作不可撤销。')){ state.records=[]; state.fixedItems=[]; saveState(); renderAll(); showToast('🗑️ 数据已清除'); } }
-
-// ===== UTILS =====
+function clearData(){
+  if(confirm('确定要清除所有记录吗？此操作不可撤销。')){state.records=[];state.fixedItems=[];saveState();renderAll();showToast('🗑️ 数据已清除');}
+}
 function updateTodaySpend(){
   const t=new Date().toISOString().split('T')[0];
   const v=state.records.filter(r=>r.date===t&&r.type==='expense').reduce((s,r)=>s+r.amount,0);
   document.getElementById('todaySpend').textContent=`RM${v.toFixed(2)}`;
 }
-function closeModal(id){ document.getElementById(id).classList.remove('open'); }
-function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500); }
-
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
 updateSettingsCounts();
-document.querySelectorAll('.modal-overlay').forEach(el=>{ el.addEventListener('click',e=>{ if(e.target===el) el.classList.remove('open'); }); });
+document.querySelectorAll('.modal-overlay').forEach(el=>{
+  el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open');});
+});
 </script>
 </body>
 </html>
