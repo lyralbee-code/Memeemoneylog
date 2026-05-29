@@ -444,9 +444,52 @@ let editingRecordId = null;
 let lastQueryResults = [];
 
 function saveState(){ try{ localStorage.setItem('meelog', JSON.stringify(state)); }catch(e){} }
-function loadState(){ try{ const d=localStorage.getItem('meelog'); if(d) state=Object.assign(state,JSON.parse(d)); }catch(e){} }
+function loadState() {
+  try {
+    const d = localStorage.getItem('meelog');
+
+    if (!d) return;
+
+    const saved = JSON.parse(d);
+
+    state = {
+      ...state,
+      ...saved
+    };
+
+    if (!Array.isArray(state.records)) {
+      state.records = [];
+    }
+
+    if (!Array.isArray(state.fixedItems)) {
+      state.fixedItems = [];
+    }
+
+    state.records = state.records.map(r => ({
+      ...r,
+      amount: Number(r.amount) || 0
+    }));
+
+    state.fixedItems = state.fixedItems.map(f => ({
+      ...f,
+      amount: Number(f.amount) || 0
+    }));
+
+  } catch (err) {
+
+    console.error(err);
+
+    localStorage.removeItem('meelog');
+
+    state.records = [];
+    state.fixedItems = [];
+  }
+}
 
 loadState();
+
+localStorage.removeItem('meelog');
+
 initDateDefaults();
 renderAll();
 initQueryFilters();
