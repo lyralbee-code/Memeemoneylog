@@ -682,7 +682,7 @@ function renderFixedList(){
   list.innerHTML=state.fixedItems.map((item,i)=>{ total+=item.amount;
     return `<div class="fixed-item"><span class="fixed-emoji">${item.emoji}</span>
       <div class="fixed-info"><div class="fixed-name">${item.name}</div><div class="fixed-sub">${item.category}</div></div>
-      <span class="fixed-amount">RM${item.amount.toFixed(2)}</span>
+      <span class="fixed-amount">RM${(Number(item.amount) || 0).toFixed(2)}</span>
       <button class="fixed-del" onclick="deleteFixed(${i})">✕</button></div>`; }).join('');
   document.getElementById('fixedTotal').textContent=`RM${total.toFixed(2)}`;
 }
